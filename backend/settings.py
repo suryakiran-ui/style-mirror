@@ -2,7 +2,11 @@ from pathlib import Path
 import os
 
 from dotenv import load_dotenv
-import dj_database_url
+
+try:
+    import dj_database_url
+except ImportError:  # pragma: no cover
+    dj_database_url = None
 
 
 # ============================================================
@@ -292,3 +296,5 @@ if not DEBUG:
     CSRF_COOKIE_SECURE = True
 
     SECURE_SSL_REDIRECT = True
+
+

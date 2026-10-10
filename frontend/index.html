@@ -1,251 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>STYLE MIRROR</title>
-
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f4ef">
+  <title>Style Mirror — Your style, reimagined</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
 </head>
-
 <body>
-
-    <header class="navbar">
-        <div class="logo">STYLE MIRROR</div>
-
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#history">History</a>
-        </nav>
-    </header>
-
-
-    <main>
-
-        <!-- HOME -->
-
-        <section id="home" class="hero">
-
-            <h1>STYLE MIRROR</h1>
-
-            <p class="subtitle">
-                AI-Powered Aesthetic Matching Editor
-            </p>
-
-            <p class="description">
-                Upload a reference image and apply its visual style
-                to your own photo.
-            </p>
-
-
-            <div class="upload-container">
-
-                <!-- Reference Image -->
-
-                <div class="upload-card">
-
-                    <h2>1. Reference Image</h2>
-
-                    <p>
-                        Upload the image whose aesthetic you want to copy.
-                    </p>
-
-                    <input
-                        type="file"
-                        id="referenceImage"
-                        accept="image/*"
-                    >
-
-                    <img
-                        id="referencePreview"
-                        class="preview"
-                        alt="Reference preview"
-                    >
-
-                </div>
-
-
-                <!-- Original Image -->
-
-                <div class="upload-card">
-
-                    <h2>2. Your Photo</h2>
-
-                    <p>
-                        Upload the photo you want to edit.
-                    </p>
-
-                    <input
-                        type="file"
-                        id="originalImage"
-                        accept="image/*"
-                    >
-
-                    <img
-                        id="originalPreview"
-                        class="preview"
-                        alt="Original preview"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <button
-                id="generateButton"
-                class="primary-button"
-            >
-                GENERATE STYLE
-            </button>
-
-
-            <div id="status" class="status"></div>
-
-        </section>
-
-
-        <!-- RESULT -->
-
-        <section id="result" class="result-section">
-
-            <h2>Your STYLE MIRROR Result</h2>
-
-            <div class="result-container">
-
-                <div class="result-card">
-
-                    <h3>Original</h3>
-
-                    <img
-                        id="originalResult"
-                        class="result-image"
-                        alt="Original image"
-                    >
-
-                </div>
-
-
-                <div class="arrow">
-                    →
-                </div>
-
-
-                <div class="result-card">
-
-                    <h3>Edited</h3>
-
-                    <img
-                        id="editedResult"
-                        class="result-image"
-                        alt="Edited image"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <!-- AI STYLE PROFILE -->
-
-            <div class="style-profile">
-
-                <h2>AI Style Profile</h2>
-
-                <div class="parameters">
-
-                    <div>
-                        <span>Lightness</span>
-                        <strong id="lightness">-</strong>
-                    </div>
-
-                    <div>
-                        <span>Contrast</span>
-                        <strong id="contrast">-</strong>
-                    </div>
-
-                    <div>
-                        <span>Warmth</span>
-                        <strong id="warmth">-</strong>
-                    </div>
-
-                    <div>
-                        <span>Saturation</span>
-                        <strong id="saturation">-</strong>
-                    </div>
-
-                    <div>
-                        <span>Highlights</span>
-                        <strong id="highlight">-</strong>
-                    </div>
-
-                    <div>
-                        <span>Shadows</span>
-                        <strong id="shadow">-</strong>
-                    </div>
-
-                    <div>
-                        <span>Hue</span>
-                        <strong id="hue">-</strong>
-                    </div>
-
-                    <div>
-                        <span>Sharpness</span>
-                        <strong id="sharpen">-</strong>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="actions">
-
-                <button
-                    id="regenerateButton"
-                    class="secondary-button"
-                >
-                    REGENERATE
-                </button>
-
-                <button
-                    id="exportButton"
-                    class="primary-button"
-                >
-                    EXPORT
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- HISTORY -->
-
-        <section id="history" class="history-section">
-
-            <h2>Project History</h2>
-
-            <div id="historyContainer">
-                <p>No projects loaded yet.</p>
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <footer>
-
-        <p>
-            STYLE MIRROR — AI Aesthetic Matching Editor
-        </p>
-
-    </footer>
-
-
-    <script src="script.js"></script>
-
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Style Mirror home">
+      <span class="brand-mark">✳</span><span>style <b>mirror</b></span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="active" href="#home">Studio</a>
+      <a href="#result">Your result</a>
+      <a href="#history">History</a>
+    </nav>
+    <a class="header-cta" href="#studio">Open studio <span>↗</span></a>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> YOUR PERSONAL AI STYLE STUDIO</p>
+        <h1>Find the look.<br><em>Make it yours.</em></h1>
+        <p class="hero-description">Bring the mood of an inspiration image to your own photo. Explore a new aesthetic, while keeping your look uniquely you.</p>
+        <div class="hero-actions">
+          <a class="button button-dark" href="#studio">Create your look <span>↗</span></a>
+          <a class="text-link" href="#how-it-works">How it works <span>↓</span></a>
+        </div>
+        <div class="hero-note"><span class="note-icon">✦</span><span>One reference. Your photo. A fresh perspective.</span></div>
+      </div>
+      <div class="hero-art" aria-label="Fashion editorial inspiration">
+        <div class="art-label art-label-top">THE STYLE EDIT · Nº 01</div>
+        <div class="hero-image"></div>
+        <div class="art-caption"><span>Personal style,<br>reimagined.</span><span class="caption-number">01 / 03</span></div>
+        <div class="art-stamp">SM<br><span>STUDIO</span></div>
+      </div>
+    </section>
+
+    <section class="studio-section section-wrap" id="studio">
+      <div class="section-heading">
+        <div><p class="eyebrow">THE CREATIVE STUDIO</p><h2>Build your <em>new look.</em></h2></div>
+        <p class="section-intro">Choose an inspiration, add your photo, and let Style Mirror do the rest.</p>
+      </div>
+
+      <div class="workflow">
+        <article class="upload-card">
+          <div class="card-topline"><span class="step-number">01</span><span class="step-label">THE INSPIRATION</span><span class="step-check">✦</span></div>
+          <h3>Reference image</h3>
+          <p class="card-description">The color, lighting, and mood you want to bring into your photo.</p>
+          <label class="upload-zone" for="referenceImage">
+            <input type="file" id="referenceImage" accept="image/*">
+            <span class="upload-symbol">↑</span>
+            <strong>Choose inspiration image</strong>
+            <span class="upload-hint">Click to browse · JPG, PNG, WEBP</span>
+            <img id="referencePreview" class="upload-preview" alt="Reference image preview">
+          </label>
+          <div class="card-foot"><span class="mini-dot"></span> Use any image that inspires you</div>
+        </article>
+
+        <div class="workflow-connector" aria-hidden="true"><span>＋</span></div>
+
+        <article class="upload-card">
+          <div class="card-topline"><span class="step-number">02</span><span class="step-label">YOUR PHOTO</span><span class="step-check">✦</span></div>
+          <h3>Make it yours</h3>
+          <p class="card-description">Upload the photo you want to transform with your chosen aesthetic.</p>
+          <label class="upload-zone" for="originalImage">
+            <input type="file" id="originalImage" accept="image/*">
+            <span class="upload-symbol">↑</span>
+            <strong>Choose your photo</strong>
+            <span class="upload-hint">Click to browse · JPG, PNG, WEBP</span>
+            <img id="originalPreview" class="upload-preview" alt="Your photo preview">
+          </label>
+          <div class="card-foot"><span class="mini-dot"></span> A clear, well-lit photo works best</div>
+        </article>
+      </div>
+
+      <div class="generate-row">
+        <div class="privacy-note"><span>◎</span><span>Your creative session, made simple.</span></div>
+        <button id="generateButton" class="button button-dark generate-button" type="button">Generate my style <span>↗</span></button>
+      </div>
+      <div id="status" class="status" role="status" aria-live="polite">Your studio is ready when you are.</div>
+    </section>
+
+    <section class="how-section" id="how-it-works">
+      <div class="section-wrap how-inner">
+        <div><p class="eyebrow">A SIMPLE THREE-STEP FLOW</p><h2>Your vision,<br><em>your version.</em></h2></div>
+        <div class="how-step"><span>01</span><div><h3>Choose the mood</h3><p>Upload an image that captures the style you love.</p></div></div>
+        <div class="how-step"><span>02</span><div><h3>Make it personal</h3><p>Add your photo and generate your style profile.</p></div></div>
+        <div class="how-step"><span>03</span><div><h3>See the transformation</h3><p>Review your result, regenerate, and export your look.</p></div></div>
+      </div>
+    </section>
+
+    <section class="result-section section-wrap" id="result">
+      <div class="section-heading">
+        <div><p class="eyebrow">THE REVEAL</p><h2>Your look, <em>reimagined.</em></h2></div>
+        <p class="section-intro">Your original and styled images appear here once your generation is complete.</p>
+      </div>
+      <div class="result-grid">
+        <article class="result-card">
+          <div class="result-card-heading"><span>YOUR ORIGINAL</span><span class="result-index">01</span></div>
+          <div class="result-image-frame"><img id="originalResult" class="result-image" alt="Original photo will appear here"><div class="image-placeholder"><span>01</span><p>Your photo will appear here</p></div></div>
+        </article>
+        <div class="result-divider"><span>✳</span><small>THE SHIFT</small></div>
+        <article class="result-card result-card-featured">
+          <div class="result-card-heading"><span>YOUR STYLE MIRROR</span><span class="result-index">02</span></div>
+          <div class="result-image-frame"><img id="editedPreview" class="result-image" alt="AI-styled result will appear here"><div class="image-placeholder"><span>02</span><p>Your styled result will appear here</p></div></div>
+        </article>
+      </div>
+
+      <div class="profile-panel">
+        <div class="profile-heading"><div><p class="eyebrow">THE DETAILS</p><h3>Your AI style profile</h3></div><span class="profile-spark">✳</span></div>
+        <p class="profile-description">A quick look at the visual characteristics detected from your reference image.</p>
+        <div class="parameters">
+          <div class="parameter"><span>Lightness</span><strong id="lightness">—</strong></div>
+          <div class="parameter"><span>Contrast</span><strong id="contrast">—</strong></div>
+          <div class="parameter"><span>Warmth</span><strong id="warmth">—</strong></div>
+          <div class="parameter"><span>Saturation</span><strong id="saturation">—</strong></div>
+          <div class="parameter"><span>Highlights</span><strong id="highlight">—</strong></div>
+          <div class="parameter"><span>Shadows</span><strong id="shadow">—</strong></div>
+          <div class="parameter"><span>Hue</span><strong id="hue">—</strong></div>
+          <div class="parameter"><span>Sharpness</span><strong id="sharpen">—</strong></div>
+        </div>
+        <div class="result-actions">
+          <button id="regenerateButton" class="button button-outline" type="button">↻ &nbsp; Regenerate</button>
+          <button id="exportButton" class="button button-dark" type="button">Export image <span>↗</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="history-section" id="history">
+      <div class="section-wrap">
+        <div class="section-heading">
+          <div><p class="eyebrow">YOUR CREATIVE JOURNEY</p><h2>Recent <em>projects.</em></h2></div>
+          <p class="section-intro">Your previous style sessions, gathered in one place.</p>
+        </div>
+        <div id="historyContainer" class="history-grid"><div class="history-empty"><span>✳</span><p>Your projects will appear here after you create your first look.</p></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><a class="brand footer-brand" href="#home"><span class="brand-mark">✳</span><span>style <b>mirror</b></span></a><p>AI fashion. Your way.</p><a href="#home">Back to top ↑</a></footer>
 </body>
 </html>
