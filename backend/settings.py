@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 try:
     import dj_database_url
-except ImportError:  # pragma: no cover
+except ImportError:
     dj_database_url = None
 
 
@@ -34,18 +34,13 @@ SECRET_KEY = os.getenv(
 
 DEBUG = os.getenv("DEBUG", "True").lower() == "true"
 
-
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
     "10.230.208.35",
 ]
 
-
-# Add Render's automatically provided hostname
-RENDER_EXTERNAL_HOSTNAME = os.getenv(
-    "RENDER_EXTERNAL_HOSTNAME"
-)
+RENDER_EXTERNAL_HOSTNAME = os.getenv("RENDER_EXTERNAL_HOSTNAME")
 
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
@@ -56,19 +51,13 @@ if RENDER_EXTERNAL_HOSTNAME:
 # ============================================================
 
 INSTALLED_APPS = [
-
-    # Django
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
-    # Third-party
     "rest_framework",
-
-    # STYLE MIRROR
     "api",
 ]
 
@@ -78,22 +67,13 @@ INSTALLED_APPS = [
 # ============================================================
 
 MIDDLEWARE = [
-
     "django.middleware.security.SecurityMiddleware",
-
-    # WhiteNoise
     "whitenoise.middleware.WhiteNoiseMiddleware",
-
     "django.contrib.sessions.middleware.SessionMiddleware",
-
     "django.middleware.common.CommonMiddleware",
-
     "django.middleware.csrf.CsrfViewMiddleware",
-
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-
     "django.contrib.messages.middleware.MessageMiddleware",
-
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
@@ -110,33 +90,20 @@ ROOT_URLCONF = "backend.urls"
 # ============================================================
 
 TEMPLATES = [
-
     {
-        "BACKEND":
-            "django.template.backends.django.DjangoTemplates",
-
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             BASE_DIR / "api" / "templates",
         ],
-
         "APP_DIRS": True,
-
         "OPTIONS": {
-
             "context_processors": [
-
                 "django.template.context_processors.request",
-
                 "django.contrib.auth.context_processors.auth",
-
                 "django.contrib.messages.context_processors.messages",
-
             ],
-
         },
-
     },
-
 ]
 
 
@@ -153,33 +120,24 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-
 if DATABASE_URL:
+    if dj_database_url is None:
+        raise ImportError(
+            "Install dj-database-url to use DATABASE_URL."
+        )
 
     DATABASES = {
-
         "default": dj_database_url.parse(
             DATABASE_URL,
             conn_max_age=600,
         )
-
     }
-
 else:
-
-    # Local development database
     DATABASES = {
-
         "default": {
-
-            "ENGINE":
-                "django.db.backends.sqlite3",
-
-            "NAME":
-                BASE_DIR / "db.sqlite3",
-
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
         }
-
     }
 
 
@@ -188,27 +146,30 @@ else:
 # ============================================================
 
 AUTH_PASSWORD_VALIDATORS = [
-
     {
-        "NAME":
-            "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "UserAttributeSimilarityValidator"
+        ),
     },
-
     {
-        "NAME":
-            "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "MinimumLengthValidator"
+        ),
     },
-
     {
-        "NAME":
-            "django.contrib.auth.password_validation.CommonPasswordValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "CommonPasswordValidator"
+        ),
     },
-
     {
-        "NAME":
-            "django.contrib.auth.password_validation.NumericPasswordValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "NumericPasswordValidator"
+        ),
     },
-
 ]
 
 
@@ -233,8 +194,6 @@ STATIC_URL = "/static/"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-
-# WhiteNoise static file configuration
 STATICFILES_STORAGE = (
     "whitenoise.storage.CompressedManifestStaticFilesStorage"
 )
@@ -261,13 +220,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # ============================================================
 
 REST_FRAMEWORK = {
-
     "DEFAULT_AUTHENTICATION_CLASSES": [
-
         "api.authentication.SupabaseAuthentication",
-
     ],
-
 }
 
 
@@ -275,9 +230,7 @@ REST_FRAMEWORK = {
 # SUPABASE
 # ============================================================
 
-SUPABASE_URL = os.getenv(
-    "SUPABASE_URL"
-)
+SUPABASE_URL = os.getenv("SUPABASE_URL")
 
 
 # ============================================================
@@ -285,7 +238,6 @@ SUPABASE_URL = os.getenv(
 # ============================================================
 
 if not DEBUG:
-
     SECURE_PROXY_SSL_HEADER = (
         "HTTP_X_FORWARDED_PROTO",
         "https",
@@ -296,5 +248,3 @@ if not DEBUG:
     CSRF_COOKIE_SECURE = True
 
     SECURE_SSL_REDIRECT = True
-
-
