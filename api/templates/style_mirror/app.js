@@ -198,9 +198,11 @@ async function generateStyle() {
         // SHOW ORIGINAL PREVIEW
         // ==================================
 
-        document
-            .getElementById("originalPreview")
-            .src = uploadData.image;
+        const originalResult = document.getElementById("originalResult");
+        if (originalResult) {
+            originalResult.src = uploadData.image;
+            originalResult.classList.add("has-image");
+        }
 
 
         // ==================================
@@ -314,10 +316,11 @@ async function generateStyle() {
         // SHOW EDITED IMAGE
         // ==================================
 
-        document
-            .getElementById("editedPreview")
-            .src =
-                applyData.edited_image_url;
+        const editedPreview = document.getElementById("editedPreview");
+        if (editedPreview) {
+            editedPreview.src = applyData.edited_image_url;
+            editedPreview.classList.add("has-image");
+        }
 
 
         status.innerText =
@@ -409,10 +412,11 @@ async function regenerateImage() {
         }
 
 
-        document
-            .getElementById("editedPreview")
-            .src =
-                data.image_url;
+        const editedPreview = document.getElementById("editedPreview");
+        if (editedPreview) {
+            editedPreview.src = data.image_url;
+            editedPreview.classList.add("has-image");
+        }
 
 
         status.innerText =
@@ -633,3 +637,53 @@ async function loadHistory() {
 // ==========================================
 
 loadHistory();
+
+// ==========================================
+// FRONTEND POLISH: IMAGE PREVIEWS + PARAMETERS
+// ==========================================
+function wireImagePreview(inputId, previewId) {
+    const input = document.getElementById(inputId);
+    const preview = document.getElementById(previewId);
+    if (!input || !preview) return;
+
+    input.addEventListener("change", () => {
+        const file = input.files && input.files[0];
+        if (!file) {
+            preview.removeAttribute("src");
+            preview.classList.remove("has-image");
+            return;
+        }
+        if (!file.type.startsWith("image/")) {
+            alert("Please choose an image file.");
+            input.value = "";
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => {
+            preview.src = reader.result;
+            preview.classList.add("has-image");
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+wireImagePreview("referenceImage", "referencePreview");
+wireImagePreview("originalImage", "originalPreview");
+
+// Keep the upload preview and final result visually separate.
+const originalFileInput = document.getElementById("originalImage");
+if (originalFileInput) {
+    originalFileInput.addEventListener("change", () => {
+        const file = originalFileInput.files && originalFileInput.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+            const resultImage = document.getElementById("originalResult");
+            if (resultImage) {
+                resultImage.src = reader.result;
+                resultImage.classList.add("has-image");
+            }
+        };
+        reader.readAsDataURL(file);
+    });
+}
